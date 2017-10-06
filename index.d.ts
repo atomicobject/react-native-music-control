@@ -20,25 +20,7 @@ type PlaybackInfo = {
     elapsedTime: number
 }
 
-type ControlEvent = { 
-    // Default false for all.
-    play: string,
-    pause: string,
-    stop: string,
-    nextTrack: string,
-    previousTrack: string,
-    seek: string, 
-    skipForward: string, // options: { interval: number}
-    skipBackward: string, // options: { interval: number}
-    seekForward: string, // iOS only. -- Try Sound.setCurrentTime(time: number) react-native-sound
-    seekBackward: string, // iOS only.
-    enableLanguageOption: string, // iOS only
-    disableLanguageOption: string, // iOS only
-    setRating: string, // Android only.
-    volume: string, // Android only. Only affected when remoteVolume is enabled
-    remoteVolume: string // Android only.
-    closeNotification: string // Android only, options: {when: 'always'||'paused'||'never'}
-}
+type ControlEvent = "play" | "pause" | "stop" | "nextTrack" | "previousTrack" | "seek" | "skipForward" | "skipBackward" | "seekForward" | "seekBackward" | "enableLanguageOption" | "disableLanguageOption" | "setRating" | "volume" | "remoteVolume" | "closeNotification"
 
 export default class MusicControl {
 
@@ -92,12 +74,12 @@ export default class MusicControl {
      * 
      * @param controlName :
      * @param bool 
-     * @param options // Depends on what event handled. 
+     * @param options? // Depends on what event handled. 
      * Android only supports the intervals 5, 10, & 30, while iOS supports any number
      * The interval value only changes what number displays in the UI, 
      * the actual logic to skip forward or backward by a given amount must be implemented in the appropriate callbacks
      */
-    static enableControl(eventName: ControlEvent, bool: boolean, options: object ): void
+    static enableControl(eventName: ControlEvent, bool: boolean, options?: object ): void
 
     static handleCommand(commandName): void
 
